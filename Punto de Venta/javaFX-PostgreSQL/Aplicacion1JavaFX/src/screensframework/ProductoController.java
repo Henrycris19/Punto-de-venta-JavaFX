@@ -161,7 +161,7 @@ public class ProductoController implements Initializable, ControlledScreen {
             while(resultset.next()){
                 //Iterate Row
                 ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i = 1 ; i <= resultset.getMetaData().getColumnCount()+1; i++){
+                for(int i = 1 ; i <= resultset.getMetaData().getColumnCount(); i++){ //había un +1 en la sentencia, lo que hacía que la variable superara el tamaño del índice
                     //Iterate Column
                     row.add(resultset.getString(i));
                 }
@@ -342,11 +342,10 @@ public class ProductoController implements Initializable, ControlledScreen {
 
                 int n = estado.executeUpdate();
 
-                if (n > 0) {
-                    tablaProducto.getColumns().clear();
-                    tablaProducto.getItems().clear();
-                    cargarDatosTabla();
-                }
+                tablaProducto.getColumns().clear();  //eliminado if (n > 0)
+                tablaProducto.getItems().clear();
+                cargarDatosTabla();
+
 
                 estado.close();
 
